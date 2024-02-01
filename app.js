@@ -1,39 +1,32 @@
-// app.js
-
 var user_list = [];
 var system_list = [];
-var userPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 5, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1];
-var systemPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 5, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1];
+var userPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+var systemPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 
-for (var i = 0; i < 25; i++) 
-{
+for (var i = 0; i < 25; i++) {
     user_list[i] = i + 1;
 }
 
 var sum1 = 0;
 var sum2 = 0;
 
-function createTable(tableId, pointsArray) 
-{
+function createTable(tableId, numbersArray) {
     var table = document.getElementById(tableId);
     for (var i = 0; i < 5; i++) {
         var row = table.insertRow();
         for (var j = 0; j < 5; j++) {
             var cell = row.insertCell();
-            cell.innerHTML = pointsArray[i * 5 + j];
+            cell.innerHTML = numbersArray[i * 5 + j];
         }
     }
 }
 
-function updateTable(tableId, numbersArray) 
-{
+function updateTable(tableId, numbersArray) {
     var table = document.getElementById(tableId);
     table.innerHTML = "";
-    for (var i = 0; i < 5; i++) 
-    {
+    for (var i = 0; i < 5; i++) {
         var row = table.insertRow();
-        for (var j = 0; j < 5; j++) 
-        {
+        for (var j = 0; j < 5; j++) {
             var cell = row.insertCell();
             cell.innerHTML = numbersArray[i * 5 + j];
         }
@@ -54,58 +47,33 @@ function systemTurn() {
     processUserInput(com_input);
 }
 
-function processUserInput(input) 
-{
+function processUserInput(input) {
     var userFound = false;
-    for (var i = 0; i < 25; i++) 
-    {
-        if (input == user_list[i]) 
-        {
+    for (var i = 0; i < 25; i++) {
+        if (input == user_list[i]) {
             user_list.splice(i, 1, 0);
             system_list.push(input);
-            sum1 += userPoints[i];
+            sum1 += 1; // sum1 should increment by 1 for each valid input
             userFound = true;
             break;
         }
     }
-    if (!userFound) 
-    {
+    if (!userFound) {
         updateResult("Either Already used, or Not Available!!");
     }
 
-    if ((sum1 == 5) || (sum1 == 11) || (sum1 == 13)) 
-    {
+    if ((sum1 == 5) || (sum1 == 11) || (sum1 == 13)) {
         updateResult("Player Won!!");
-    } 
-    else 
-    {
+    } else {
         updateTable('userTable', user_list);
-        var com_input = Math.floor(Math.random() * 25) + 1;
-        for (var i = 0; i < 25; i++) 
-        {
-            if (com_input == user_list[i]) 
-            {
-                user_list.splice(i, 1, 0);
-                system_list.push(com_input);
-                sum2 += systemPoints[i];
-                updateResult("System Entered: " + com_input);
-                break;
-            }
-        }
-        if ((sum2 == 5) || (sum2 == 11) || (sum2 == 13)) 
-        {
-            updateResult("System Won!!");
-        } 
-        else 
-        {
-            updateTable('systemTable', system_list);
-        }
+        systemTurn(); // Automatically trigger the system's turn after the user's turn
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () 
-{
-    createTable('userTable', userPoints);
-    createTable('systemTable', systemPoints);
+document.addEventListener('DOMContentLoaded', function () {
+    createTable('userTable', user_list);
+    createTable('systemTable', system_list);
 });
 
+// Initialize the system's table with numbers 1-25
+updateTable('systemTable', system_list);
