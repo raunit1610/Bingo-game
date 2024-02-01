@@ -60,10 +60,23 @@ function getUserInput() {
 
 function processUserInput(input) 
 {
+
+    if (input < 1 || input > 25) {
+        updateResult("Invalid Input! Enter a number between 1 and 25.");
+        getUserInput();
+        return;
+    }
+
+    if (user_list.includes(input)) {
+        updateResult("Already Used! Enter a different number.");
+        getUserInput();
+        return;
+    }
+
     var userFound = false;
     for (var i = 0; i < 25; i++) 
     {
-        if (input == user_list[i]) 
+        if (input == userPoints[i] && user_list[i] !== 0) 
         {
             user_list.splice(i, 1, 0);
             system_list.push(input);
