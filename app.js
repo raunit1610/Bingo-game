@@ -40,14 +40,18 @@ function updateTable(tableId, numbersArray)
     }
 }
 
-function updateResult(result) 
-{
-    console.log(result);
+function updateResult(result) {
+    document.getElementById('result').innerText = result;
 }
 
-function getUserInput(input) 
-{
+function getUserInput() {
+    var input = prompt("Enter Your Input (1-25): ");
     processUserInput(input);
+}
+
+function systemTurn() {
+    var com_input = Math.floor(Math.random() * 25) + 1;
+    processUserInput(com_input);
 }
 
 function processUserInput(input) 
