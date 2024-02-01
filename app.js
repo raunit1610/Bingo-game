@@ -89,7 +89,7 @@ function processUserInput(input)
     log.push("Player Entered: " + input);
     updateLog();
 
-    if ((sum1 == 36) || (sum1 == 37) || (sum1 == 41)) 
+    if ((sum1 > 35) && (sum1 < 42)) 
     {
         updateResult("Player Won!!");
         return;
