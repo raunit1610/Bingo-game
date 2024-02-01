@@ -37,6 +37,7 @@ function updateTable(tableId, numbersArray) {
 
 function updateResult(result) {
     console.log(result);
+    document.getElementById('result').innerText = result;
 }
 
 function getUserInput() {
@@ -60,6 +61,7 @@ function processUserInput(input) {
 
     if (!userFound) {
         updateResult("Either Already used, or Not Available!!");
+        getUserInput(); // Prompt the user again for input
         return;
     }
 
@@ -94,6 +96,7 @@ function processSystemInput(com_input) {
 
     if (!userFound) {
         updateResult("System Error: Invalid Input!!");
+        systemTurn(); // Trigger the system's turn again after an invalid input
         return;
     }
 
