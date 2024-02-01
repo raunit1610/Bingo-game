@@ -2,6 +2,7 @@ var user_list = [];
 var system_list = [];
 var userPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 var systemPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+var points = [1,1,1,1,1,1,3,3,3,1,1,3,3,3,1,1,3,3,3,1,1,1,1,1,1]
 
 for (var i = 0; i < 25; i++) {
     user_list[i] = i + 1;
@@ -53,7 +54,7 @@ function processUserInput(input) {
         if (input == user_list[i]) {
             user_list.splice(i, 1, 0);
             system_list.push(input);
-            sum1 += 1; // sum1 should increment by 1 for each valid input
+            sum1 += points[i]; 
             userFound = true;
             break;
         }
@@ -62,11 +63,11 @@ function processUserInput(input) {
         updateResult("Either Already used, or Not Available!!");
     }
 
-    if ((sum1 == 5) || (sum1 == 11) || (sum1 == 13)) {
+    if ((sum1 == 25) || (sum1 == 32) || (sum1 == 37)) {
         updateResult("Player Won!!");
     } else {
         updateTable('userTable', user_list);
-        systemTurn(); // Automatically trigger the system's turn after the user's turn
+        systemTurn();
     }
 }
 
@@ -75,7 +76,7 @@ function processSystemInput(input) {
     for (var i = 0; i < 25; i++) {
         if (input == system_list[i]) {
             system_list.splice(i, 1, 0);
-            sum2 += 1; // sum2 should increment by 1 for each valid input
+            sum2 += points[i]; 
             systemFound = true;
             break;
         }
@@ -84,7 +85,7 @@ function processSystemInput(input) {
         updateResult("System Error: Invalid Input!!");
     }
 
-    if ((sum2 == 5) || (sum2 == 11) || (sum2 == 13)) {
+    if ((sum2 == 25) || (sum2 == 32) || (sum2 == 37)) {
         updateResult("System Won!!");
     } else {
         updateTable('systemTable', system_list);
