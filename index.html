@@ -1,1 +1,27 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Game</title>
+    <link rel="stylesheet" href="./prac.css">
+</head>
+<body>
+    <h1>BINGO GAME</h1>
+    <div class="block">
+        <table id="userTable">
+            <!-- User's Bingo Grid -->
+        </table>
+    </div>
+    <div class="block">
+        <table id="systemTable">
+            <!-- System's Bingo Grid -->
+        </table>
+    </div>
+    <div id="result"></div>
+    <div id="systemResult"></div>
+    <button onclick="getUserInput()">User Turn</button>
+    <button onclick="systemTurn()">System Turn</button>
+    <script src="./app.js"></script>
+</body>
+</html>
