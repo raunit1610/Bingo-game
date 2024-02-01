@@ -75,13 +75,13 @@ function processUserInput(input) {
 }
 
 function generateValidInput() {
-    var com_input = Math.floor(Math.random() * 25) + 1;
-    // Check if the generated input is already used
-    while (system_list.includes(com_input)) {
+    var com_input;
+    do {
         com_input = Math.floor(Math.random() * 25) + 1;
-    }
+    } while (system_list.includes(com_input));
     return com_input;
 }
+
 function processSystemInput(input) {
     var systemFound = false;
     for (var i = 0; i < 25; i++) {
