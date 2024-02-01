@@ -91,24 +91,30 @@ function processSystemInput(input) {
             systemFound = true;
             break;
         }
-        else
-        {
-            continue;
-        }
     }
+    
     if (!systemFound) {
-        
-        updateResult("System Error: Invalid Input!!");
+        updateSystemResult("System Error: Invalid Input!!");
     }
+
+    updateTable('systemTable', system_list); // Update the system table after processing the input
 
     if ((sum2 == 5) || (sum2 == 11) || (sum2 == 13)) {
         updateSystemResult("System Won!!");
     } else {
-        updateTable('systemTable', system_list);
+        // Check for user's win condition after the system's turn
+        if ((sum1 == 5) || (sum1 == 11) || (sum1 == 13)) {
+            updateResult("Player Won!!");
+        } else {
+            // Trigger the user's turn after the system's turn
+            updateTable('userTable', user_list);
+            getUserInput();
+        }
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    createTable('userTable', user_list);
+    createTable('userTable', userPoints); // Use userPoints array for the user table
     createTable('systemTable', systemPoints); // Using systemPoints array for the system table
+    getUserInput(); // Start the game with the user's turn
 });
