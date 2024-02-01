@@ -39,9 +39,13 @@ function updateResult(result) {
     console.log(result);
 }
 
-function getUserInput(input) {
-    processUserInput(input);
+function getUserInput() {
+    var input = prompt("Enter Your Input (1-25): ");
+    if (input !== null) {  // Check if the user clicked "Cancel"
+        processUserInput(input);
+    }
 }
+
 
 function processUserInput(input) {
     var userFound = false;
@@ -68,10 +72,12 @@ function processUserInput(input) {
 }
 
 function systemTurn() {
-    var com_input = Math.floor(Math.random() * 25) + 1;
-    console.log(com_input)
-    processSystemInput(com_input);
+    setTimeout(function () {
+        var com_input = Math.floor(Math.random() * 25) + 1;
+        processSystemInput(com_input);
+    }, 1000);  // Introduce a delay of 1000 milliseconds (1 second)
 }
+
 
 function processSystemInput(com_input) {
     var systemFound = false;
