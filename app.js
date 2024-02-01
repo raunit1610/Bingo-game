@@ -69,6 +69,7 @@ function processUserInput(input) {
 
 function systemTurn() {
     var com_input = Math.floor(Math.random() * 25) + 1;
+    console.log(com_input)
     processSystemInput(com_input);
 }
 
