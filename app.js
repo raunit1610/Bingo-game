@@ -47,7 +47,7 @@ function getUserInput() {
 }
 
 function systemTurn() {
-    var com_input = Math.floor(Math.random() * 25) + 1;
+    var com_input = generateValidInput();
     processSystemInput(com_input);
 }
 
@@ -74,6 +74,14 @@ function processUserInput(input) {
     }
 }
 
+function generateValidInput() {
+    var com_input = Math.floor(Math.random() * 25) + 1;
+    // Check if the generated input is already used
+    while (system_list.includes(com_input)) {
+        com_input = Math.floor(Math.random() * 25) + 1;
+    }
+    return com_input;
+}
 function processSystemInput(input) {
     var systemFound = false;
     for (var i = 0; i < 25; i++) {
