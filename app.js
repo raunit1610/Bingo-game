@@ -37,10 +37,6 @@ function updateResult(result) {
     document.getElementById('result').innerText = result;
 }
 
-function updateSystemResult(result) {
-    document.getElementById('systemResult').innerText = result;
-}
-
 function getUserInput() {
     var input = prompt("Enter Your Input (1-25): ");
     processUserInput(input);
@@ -57,7 +53,7 @@ function processUserInput(input) {
         if (input == user_list[i]) {
             user_list.splice(i, 1, 0);
             system_list.push(input);
-            sum1 += 1; // sum1 should increment by 1 for each valid input
+            sum1 += 1;
             userFound = true;
             break;
         }
@@ -66,12 +62,8 @@ function processUserInput(input) {
         updateResult("Either Already used, or Not Available!!");
     }
 
-    if ((sum1 == 5) || (sum1 == 11) || (sum1 == 13)) {
-        updateResult("Player Won!!");
-    } else {
-        updateTable('userTable', user_list);
-        systemTurn(); // Automatically trigger the system's turn after the user's turn
-    }
+    updateTable('userTable', user_list);
+    checkWinner(); // Check for the winner after user's turn
 }
 
 function generateValidInput() {
@@ -87,34 +79,29 @@ function processSystemInput(input) {
     for (var i = 0; i < 25; i++) {
         if (input == system_list[i]) {
             system_list.splice(i, 1, 0);
-            sum2 += 1; // sum2 should increment by 1 for each valid input
+            sum2 += 1;
             systemFound = true;
             break;
         }
     }
     
     if (!systemFound) {
-        updateSystemResult("System Error: Invalid Input!!");
+        updateResult("System Error: Invalid Input!!");
     }
 
-    updateTable('systemTable', system_list); // Update the system table after processing the input
+    updateTable('systemTable', system_list);
+    checkWinner(); // Check for the winner after system's turn
+}
 
-    if ((sum2 == 5) || (sum2 == 11) || (sum2 == 13)) {
-        updateSystemResult("System Won!!");
-    } else {
-        // Check for user's win condition after the system's turn
-        if ((sum1 == 5) || (sum1 == 11) || (sum1 == 13)) {
-            updateResult("Player Won!!");
-        } else {
-            // Trigger the user's turn after the system's turn
-            updateTable('userTable', user_list);
-            getUserInput();
-        }
+function checkWinner() {
+    if ((sum1 == 5) || (sum1 == 11) || (sum1 == 13)) {
+        updateResult("Player Won!!");
+    } else if ((sum2 == 5) || (sum2 == 11) || (sum2 == 13)) {
+        updateResult("System Won!!");
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    createTable('userTable', userPoints); // Use userPoints array for the user table
-    createTable('systemTable', systemPoints); // Using systemPoints array for the system table
-    getUserInput(); // Start the game with the user's turn
+    createTable('userTable', userPoints);
+    createTable('systemTable', systemPoints);
 });
