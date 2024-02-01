@@ -44,7 +44,7 @@ function getUserInput() {
 
 function systemTurn() {
     var com_input = Math.floor(Math.random() * 25) + 1;
-    processUserInput(com_input);
+    processSystemInput(com_input);
 }
 
 function processUserInput(input) {
@@ -70,10 +70,27 @@ function processUserInput(input) {
     }
 }
 
+function processSystemInput(input) {
+    var systemFound = false;
+    for (var i = 0; i < 25; i++) {
+        if (input == system_list[i]) {
+            system_list.splice(i, 1, 0);
+            sum2 += 1; // sum2 should increment by 1 for each valid input
+            systemFound = true;
+            break;
+        }
+    }
+    if (!systemFound) {
+        updateResult("System Error: Invalid Input!!");
+    }
+
+    if ((sum2 == 5) || (sum2 == 11) || (sum2 == 13)) {
+        updateResult("System Won!!");
+    } else {
+        updateTable('systemTable', system_list);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     createTable('userTable', user_list);
-    createTable('systemTable', system_list);
-});
-
-// Initialize the system's table with numbers 1-25
-updateTable('systemTable', system_list);
+    createTable('systemTable
