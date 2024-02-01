@@ -3,7 +3,8 @@
 var user_list = [];
 var system_list = [];
 var userPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1];
-var systemPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1];
+var systemPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1]
+var userp = [1, 1, 3, 3, 1, 1, 3, 1, 1, 3, 3, 1, 3, 1, 3, 3, 1, 1, 3, 1, 1, 3, 3, 1, 1];
 var log = [];
 
 for (var i = 0; i < 25; i++) 
@@ -13,6 +14,7 @@ for (var i = 0; i < 25; i++)
 
 var sum1 = 0;
 var sum2 = 0;
+const target = 40;
 
 function createTable(tableId, pointsArray) 
 {
@@ -70,8 +72,8 @@ function processUserInput(input)
         {
             user_list.splice(i, 1, 0);
             system_list.push(input);
-            sum1 += userPoints[i];
-            sum2 += userPoints[i];
+            sum1 += userp[i];
+            sum2 += systemPoints[i];
             userFound = true;
             break;
         }
@@ -87,7 +89,7 @@ function processUserInput(input)
     log.push("Player Entered: " + input);
     updateLog();
 
-    if ((sum1 == 25) || (sum1 == 32) || (sum1 == 37)) 
+    if ((sum1 == 36) || (sum1 == 37) || (sum1 == 41)) 
     {
         updateResult("Player Won!!");
         return;
@@ -122,7 +124,7 @@ function processSystemInput(com_input)
             user_list.splice(i, 1, 0);
             system_list.push(com_input);
             sum2 += systemPoints[i];
-            sum1 += systemPoints[i];
+            sum1 += userp[i];
             userFound = true;
             break;
         }
@@ -144,7 +146,7 @@ function processSystemInput(com_input)
         return;
     }
 
-    if ((sum1 == 25) || (sum1 == 32) || (sum1 == 37)) 
+    if ((sum1 == 36) || (sum1 == 37) || (sum1 == 41)) 
     {
         updateResult("Player Won!!");
         return;
