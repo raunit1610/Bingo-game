@@ -3,7 +3,7 @@
 var user_list = [];
 var system_list = [];
 var userPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1];
-var systemPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1]
+var systemPoints = [1, 2, 3, 1, 1, 1, 3, 2, 3, 2, 3, 2, 1, 2, 3, 2, 3, 2, 3, 1, 1, 1, 3, 2, 1]
 var userp = [1, 1, 3, 3, 1, 1, 3, 1, 1, 3, 3, 1, 3, 1, 3, 3, 1, 1, 3, 1, 1, 3, 3, 1, 1];
 var log = [];
 
@@ -95,7 +95,7 @@ function processUserInput(input)
         return;
     }
 
-    if ((sum2 == 25) || (sum2 == 32) || (sum2 == 37)) 
+    if ((sum2 > 32) && (sum2 < 40)) 
     {
         updateResult("System Won!!");
         return;
@@ -140,7 +140,7 @@ function processSystemInput(com_input)
     log.push("System Entered: " + com_input);
     updateLog(); 
 
-    if ((sum2 == 25) || (sum2 == 32) || (sum2 == 37)) 
+    if ((sum2 > 32) && (sum2 < 40)) 
     {
         updateResult("System Won!!");
         return;
