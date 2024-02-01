@@ -4,7 +4,6 @@ var user_list = [];
 var system_list = [];
 var userPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 5, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1];
 var systemPoints = [1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 5, 3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1];
-var log = [];
 
 for (var i = 0; i < 25; i++) {
     user_list[i] = i + 1;
@@ -41,11 +40,6 @@ function updateResult(result) {
     document.getElementById('result').innerText = result;
 }
 
-function updateLog() {
-    var logContainer = document.getElementById('log');
-    logContainer.innerHTML = log.join('<br>');
-}
-
 function getUserInput() {
     var input = prompt("Enter Your Input (1-25): ");
     if (input !== null) {
@@ -67,16 +61,13 @@ function processUserInput(input) {
 
     if (!userFound) {
         updateResult("Either Already used, or Not Available!!");
-        getUserInput();
+        getUserInput(); // Prompt the user again for input
         return;
     }
 
-    log.push("Player Entered: " + input);
-    updateLog();
-
     if ((sum1 == 5) || (sum1 == 11) || (sum1 == 13)) {
         updateResult("Player Won!!");
-        return;
+        return; // Stop the game if the player has won
     }
 
     updateTable('userTable', user_list);
@@ -97,6 +88,7 @@ function processSystemInput(com_input) {
             user_list.splice(i, 1, 0);
             system_list.push(com_input);
             sum2 += systemPoints[i];
+            updateResult("System Entered: " + com_input);
             userFound = true;
             break;
         }
@@ -104,16 +96,13 @@ function processSystemInput(com_input) {
 
     if (!userFound) {
         updateResult("System Error: Invalid Input!!");
-        systemTurn();
+        systemTurn(); // Trigger the system's turn again after an invalid input
         return;
     }
 
-    log.push("System Entered: " + com_input);
-    updateLog();
-
     if ((sum2 == 5) || (sum2 == 11) || (sum2 == 13)) {
         updateResult("System Won!!");
-        return;
+        return; // Stop the game if the system has won
     }
 
     updateTable('systemTable', system_list);
