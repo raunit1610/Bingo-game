@@ -37,6 +37,10 @@ function updateResult(result) {
     document.getElementById('result').innerText = result;
 }
 
+function updateSystemResult(result) {
+    document.getElementById('systemResult').innerText = result;
+}
+
 function getUserInput() {
     var input = prompt("Enter Your Input (1-25): ");
     processUserInput(input);
@@ -85,7 +89,7 @@ function processSystemInput(input) {
     }
 
     if ((sum2 == 5) || (sum2 == 11) || (sum2 == 13)) {
-        updateResult("System Won!!");
+        updateSystemResult("System Won!!");
     } else {
         updateTable('systemTable', system_list);
     }
@@ -93,4 +97,5 @@ function processSystemInput(input) {
 
 document.addEventListener('DOMContentLoaded', function () {
     createTable('userTable', user_list);
-    createTable('systemTable
+    createTable('systemTable', systemPoints); // Using systemPoints array for the system table
+});
