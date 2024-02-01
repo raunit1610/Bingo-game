@@ -91,8 +91,13 @@ function processSystemInput(input) {
             systemFound = true;
             break;
         }
+        else
+        {
+            continue;
+        }
     }
     if (!systemFound) {
+        
         updateResult("System Error: Invalid Input!!");
     }
 
